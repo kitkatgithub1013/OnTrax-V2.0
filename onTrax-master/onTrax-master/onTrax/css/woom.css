@@ -1,0 +1,585 @@
+@font-face {
+    font-family: 'woom';
+    src: url("/fonts/font-WOOM-Numbers-Regular.woff2") format("woff2"), 
+        url("/fonts/font-WOOM-Numbers-Regular.woff") format("woff"), 
+        url("/fonts/font-WOOM-Numbers-Regular.eot") format("eot"), 
+        url("/fonts/font-WOOM-Numbers-Regular.otf") format("otf");
+    font-weight: normal;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'BrandonText';
+    src: url("/fonts/font-brandontext-bold-webfont.woff2") format("woff2"), url("/fonts/font-brandontext-bold-webfont.woff") format("woff");
+    font-weight: bold;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'BrandonText';
+    src: url("/fonts/font-brandontext-regular-webfont.woff2") format("woff2"), url("/fonts/font-brandontext-regular-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'BrandonText';
+    src: url("/fonts/font-brandontext-light-webfont.woff2") format("woff2"), url("/fonts/font-brandontext-light-webfont.woff") format("woff");
+    font-weight: 300;
+    font-style: normal
+}
+
+footer{
+    height: 100px; 
+    width:100%;
+    position: absolute;
+    left: 0;
+    bottom: 0; 
+}
+
+input[type="radio"]:checked {
+    background-color: green;
+}
+
+body 
+{
+    padding: 0px;
+    margin: 0 auto;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased
+}
+#woomForm {margin: 0 auto;}
+#woomForm .form-control {margin-top: 1rem;}
+
+.btn-row{
+
+    min-height:48px;
+
+}
+
+
+
+/** Load Spinner ** /
+/* Safari */
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #3498db;
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+
+.lock-screen {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+}
+
+/* Repsonsive Breakpoints */
+
+@media (min-width: 576px) {
+    .h1, h1 {
+        
+        font-size: 1.5rem;
+
+    }
+    .h2, h2 {
+        font-size: 1rem;
+    }
+    .btn-circle.btn-lg {
+        width: 125px;
+        height: 125px;
+        font-size: 14px;
+        line-height: 1.33;
+        border-radius: 100%;
+      }
+  }
+  
+  @media (min-width: 768px) {
+    .h1, h1 {
+        
+        font-size: 2rem;
+
+    }
+    .h2, h2 {
+        font-size: 1.5rem;
+    }
+    .btn-circle.btn-lg {
+        width: 300px;
+        height: 300px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 100%;
+      }
+  }
+  
+  @media (min-width: 992px) {
+    .h1, h1 {
+        
+        font-size: 2.5rem;
+
+    }
+    .h2, h2 {
+        font-size: 2rem;
+    }
+    .btn-circle.btn-lg {
+        width: 300px;
+        height: 300px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 100%;
+      }
+  }
+  
+  @media (min-width: 1200px) {
+
+    .btn-circle.btn-lg {
+        width: 300px;
+        height: 300px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 100%;
+      }
+
+  }
+
+  /** Font Setting **/
+  * {
+    font-size: 16px;
+    font-family: "BrandonText";
+    font-weight: normal;
+    color: #222;
+   }
+   
+body {
+
+    font-family: "BrandonText";
+    font-weight: normal;
+    color: #222;
+}
+.ui-widget, 
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+    font-family: "BrandonText";
+    font-weight: normal;
+}
+
+.woom {
+
+    font-family: 'woom';
+    speak: none;
+    color: #eb0613;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* TECH Styles */
+#process_product.ui-accordion .ui-accordion-content {
+    padding-top: 0em;
+    padding-bottom: 0em;
+    overflow: auto;
+}
+
+#batches {
+    display: block;
+    overflow: auto;
+    max-height: 135px;
+}
+
+#person_name {
+    position: fixed;
+    bottom: 0;
+    right: 10px;
+}
+/*Back button style*/
+.back-button:hover {
+    text-decoration: none;
+}
+/* End TECH Styles */
+/* ADMIN Styles */
+
+#SearchContainer select.form-control {
+    padding-left: 2px;
+}
+#AdminContent{
+    padding-top: 30px;
+
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 80px;
+}
+
+
+.ui-widget,
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+    font-family: "BrandonText";
+    font-weight: normal;
+}
+
+.logo {
+    width: 240px;
+    height: auto;
+    position: absolute;
+    top: 20px;
+    left: 85%;
+}
+
+.banner-container {
+    background-color: #ccc;
+}
+
+#dashboard #edit-app #data-management {
+    border-radius: 30px;
+}
+
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /*	background: linear-gradient(to bottom, #ffffff 0%, #a2a2a2 100%);*/
+}
+
+#woomForm {
+    margin: 0 auto;
+}
+
+#woomForm .form-control {
+    margin-top: 1rem;
+}
+
+.btn-circle.btn-lg {
+    width: 300px;
+    height: 300px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 100%;
+}
+
+
+/** Edit onTrax */
+
+    .form-group {
+        border: solid;
+        border-color: #ccc;
+        border-width: 2px;
+        border-radius: 3px;
+        padding: 10px;
+        background-color: white;
+    }
+
+    .banner-container {
+        background-color: #ccc;
+    }
+
+    .left-buffer-to-mid {
+        margin-left: 20%;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 58px;
+    }
+
+    .form-check-label {
+        font-size: 20px;
+        line-height: 1;
+        width: 100%;
+    }
+
+    .process-label {
+        width: 65%;
+    }
+
+    input[type=checkbox] {
+        width: 13px;
+        height: 13px;
+        vertical-align: bottom;
+    }
+
+    .form-check-label:hover, .form-check-input:hover {
+        cursor: pointer;
+    }
+
+    .col-md-2 {
+        border: none;
+        border-width: 2px;
+        border-color: #aaa;
+        /*  Used to be 3px, this is easier*/
+        border-radius: 0px;
+        background-color: white;
+    }
+
+    .top-buffer-20 {
+        margin-top: 20px;
+    }
+
+    .top-buffer-40 {
+        margin-top: 40px;
+    }
+
+    .bottom-buffer-15 {
+        margin-bottom: 15px;
+    }
+
+    hr {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #back {
+        border: none;
+        /*margin-left: 10px;*/
+        border-radius: 3px;
+        font-size: 65px;
+        background-color: #f00000;
+        color: #ddd;
+    }
+
+        #back:hover {
+            background-color: #d70000;
+            color: #eee;
+        }
+
+    .hidden-col {
+        background-color: transparent;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .employee-hidden {
+        border: none;
+        border-width: 1px;
+    }
+
+    input[type=text] {
+        /*margin-left: 10px;*/
+    }
+
+    .borderless {
+        border: none;
+    }
+
+    .save {
+        margin-left: 70px;
+    }
+
+    #process-edit-save {
+        margin-left: 40px;
+    }
+
+    .hidden-menu-header-left {
+        text-align: right;
+        border-bottom: solid;
+        border-color: #ddd;
+        border-width: 2px;
+    }
+
+    .hidden-menu-header-right {
+        text-align: left;
+        border-bottom: solid;
+        border-color: #ddd;
+        border-width: 2px;
+    }
+
+    .btn-sm {
+        height: 20px;
+        width: 25%;
+        line-height: .8
+    }
+
+    .process-menu-row {
+        padding: 0px;
+    }
+
+    .process-menu-check {
+        margin-top: 12px;
+    }
+
+    .process-menu-check-col {
+        margin-right: -20px;
+        padding-right: 0px;
+    }
+    /*currently redundant because of change @ line 31*/
+    #employee-hidden-col #processEdit-hidden-col {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    #issue-hidden-col #product-hidden-col {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+
+
+/** End Edit onTrax */
+
+
+/** Data Management */
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 50px;
+}
+
+#upload {
+    font-size: 300px;
+    color: #ddd;
+}
+
+#upload-info {
+    text-align: center;
+    font-size: 20px;
+    color: darkgray;
+    margin-top: 40px;
+}
+
+table
+/*
+table {
+    border: solid;
+    border-width: 2px;
+    border-color: #ccc;
+    border-radius: 3px;
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+    */
+th {
+    background-color: #eee;
+    padding-left: 5px;
+    border-right: solid;
+    border-right-width: 1px;
+    border-right-color: #ccc;
+}
+
+tr {
+    width: 10%;
+    border: solid;
+    border-color: #ccc;
+    border-width: 1px;
+}
+
+td {
+    border-right: solid;
+    border-right-color: #ccc;
+    border-right-width: 1px;
+    padding-left: 5px;
+}
+
+
+
+#editable:hover {
+    background-color: aliceblue;
+}
+
+#upload {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/** Data Management */
+
+/* END ADMIN Styles*/
+
+
+/** Bootstrap Add-ons **/
+
+.float-left {
+    float: left !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.float-none {
+    float: none !important;
+}
+
+/** Modal Settings **/
+.modal-dialog,.modal-content {
+    height: 90%;
+}
+
+.modal-body {
+    max-height: calc(100% - 120px);
+    overflow-y: scroll;
+}
+
+#Quantity {
+    width: 150px;
+    height: 36px;
+}
+.ui-spinner a.ui-spinner-button{
+width: 25px;
+
+}
+
+.ui-icon-triangle-1-e {
+    right: 0 !important;
+    left: auto !important;
+}

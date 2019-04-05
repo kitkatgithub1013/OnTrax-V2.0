@@ -1,0 +1,89 @@
+﻿@model List<onTrax.Models.Employee>
+@{
+    ViewBag.Title = "Index";
+}
+
+@* JS to display Employee Selection Modal and hide it when Employee is Selected*@
+@section JavaScript
+{
+    <script>
+        $(window).on('load', function () {
+            $('#employeeModal').modal('show');
+            $('input[type=radio][name=EmployeeID]').on('change', function () {
+                $('#employeeModal').modal('hide');
+                $('#employeeName').html($('input[type=radio][name=EmployeeID]:checked').attr("title"));
+            });
+        });
+    </script>
+}
+
+<!-- Check In Form-->
+
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        @if (Model != null && Model.Count() >0)
+        {
+            using (Html.BeginForm("Run", "Production", FormMethod.Get, new { @class = "col-12" }))
+            {
+                <div class="col-6 m-auto p-5">
+                    <!-- Button to open Employee selection modal (#employeeModal) -->
+                    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#employeeModal">
+                        Select User
+                    </button>
+                </div>
+
+                <div class="col ">
+                    <div class="input-group input-group-lg col-5 m-auto">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="employeeName" data-toggle="modal" data-target="#employeeModal">Employee</span>
+                        </div>
+                        <input type="tel" name="PIN" id="PIN" class="form-control" aria-label="PIN" aria-describedby="inputGroup-sizing-sm" placeholder="PIN">
+                    </div>
+                </div>
+
+                <div class="col-6 m-auto p-5">
+                    <input type="submit" value="Check In" class="btn btn-success btn-lg btn-block" />
+                </div>
+
+                <!-- The Employee Selection Modal -->
+                <div class="modal fade" id="employeeModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Select User</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <fieldset id="employee-list" class="col-12 text-center">
+                                    @foreach (var item in Model)
+                                    {
+                                        <label class="font-weight-bold btn btn-secondary btn-block" for="@item.EmployeeID" value="@item.EmployeeName">
+                                            @item.EmployeeName
+                                            <input type="radio" name="EmployeeID" title="@item.EmployeeName" id="@item.EmployeeID" value="@item.EmployeeID" autocomplete="off" class="selector" style="display: none;">
+                                        </label>
+                                    }
+                                </fieldset>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- End Employee Modal -->
+            }
+
+        }
+
+    </div>
+</div>
+
+
+<!-- End Check In Form-->

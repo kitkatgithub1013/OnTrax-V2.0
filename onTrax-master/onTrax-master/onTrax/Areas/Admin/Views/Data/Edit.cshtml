@@ -1,0 +1,127 @@
+@model onTrax.ViewModels.EditDataViewModel
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Edit Production Data";
+}
+
+@* Display Search Form *@
+@using (Html.BeginForm("Edit", "Data", FormMethod.Get, new { @class = "" }))
+{
+    <div class="container" id="SearchContainer">
+        <div class="row">
+            <div class="col-2 pl-0 m-auto"><input type="Date" id="Date" name="Date" value="@Model.Date" class="form-control"></div>
+            @* Show Dropdowns if they exists*@
+
+            @if (Model.EmployeeList != null && Model.EmployeeList.Where(x => x != null).Count() > 0)
+            {
+                <div class="col-2 m-auto">@Html.DropDownList("EmployeeID", new SelectList(Model.EmployeeList, "EmployeeID", "EmployeeName"), "Employee", new { @class = "form-control col-12" })</div>
+            }
+            @if (Model.ProcessList != null && Model.ProcessList.Where(x => x != null).Count() > 0)
+            {
+                <div class="col-2 pl-0 m-auto">@Html.DropDownList("ProcessID", new SelectList(Model.ProcessList, "ProcessID", "ProcessName"), "Process", new { @class = "form-control col-12" })</div>
+            }
+            @if (Model.ProductList != null && Model.ProductList.Where(x => x != null).Count() > 0)
+            {
+                <div class="col-2 pl-0 m-auto">@Html.DropDownList("ProductID", new SelectList(Model.ProductList, "ProductID", "ProductName"), "Product", new { @class = "form-control col-12" })</div>
+            }
+            @if (Model.IssueList != null && Model.IssueList.Where(x => x != null).Count() > 0)
+            {
+                <div class="col-1 pl-0 m-auto">@Html.DropDownList("IssueID", new SelectList(Model.IssueList, "IssueID", "IssueName"), "Issue", new { @class = "form-control col-12" })</div>
+            }
+
+            @if (Model.BatchList != null && Model.BatchList.Where(x => x != null).Count() > 0)
+            {
+                <div class="col-1 pl-0 m-auto">@Html.DropDownList("BatchID", new SelectList(Model.BatchList, "BatchID", "BatchName"), "Batch", new { @class = "form-control col-12" })</div>
+            }
+            
+            
+            
+            
+            <div class="col-2 pl-0 "><input type="submit" value="Search" class="btn btn-primary btn col-12" /></div>
+        </div>
+    </div>
+}
+
+
+@* 
+    Display Search Results
+    If no search defined, display all results    
+*@
+<table id="ProductionTable" class="table mt-2">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Process</th>
+            <th>Product</th>
+            <th>Issue</th>
+            <th>Batch #</th>
+            <th>Start</th>
+            <th>Stop</th>
+            <th>Duration (min)</th>
+            <th>Quantity</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        @* Display production results if they exists *@
+        @if (Model.PagedProductionList != null && Model.PagedProductionList.Where(x => x != null).Count() > 0)
+        {
+            foreach (var item in Model.PagedProductionList.Where(x => x !=null))
+             {
+                <tr>
+                    <td>@item.StartTime.ToString("MM/dd/yyyy")</td>
+                    <td >@item.Employee.EmployeeName</td>
+                    <td >@item.Process.ProcessName</td>
+                    <td >@item.Product.ProductName</td>
+                    @* Display all issues seperated by a comma *@
+                    <td>@String.Join(", ", item.Issues.Select(x => x.IssueName))</td>
+                    <td >@item.Batch.BatchName</td>
+                    <td>@item.StartTime.ToString("hh:mm")</td>
+                    <td>@item.EndTime.ToString("hh:mm")</td>
+                    <td >@item.Duration</td>
+                    <td >@item.Quantity</td>
+                    <td>
+                        @Html.ActionLink(" ", "Delete", "Data", new { id = item.ProductionID }, new { @class = "col m-auto glyphicon glyphicon-trash", onclick = "return confirm('Are you sure want to delete this production record?');" })
+                        @*<button onClick="confirmDelete()" class="col m-auto glyphicon glyphicon-trash" id="item.ProductionID"></button>*@
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "Update", "Data", new { id = item.ProductionID }, new { @class = "col m-auto glyphicon glyphicon-pencil" })
+                    </td>
+                </tr>
+            }
+
+        }
+        else
+        {
+            @** We didn't find anything to display **@ 
+            <tr>
+                <td colspan="12">
+                    <span> No records found </span>
+                </td>
+            </tr>
+            
+        }
+
+    </tbody>
+</table>
+        @* Display page navigation if production records exist *@
+
+        @if (Model.PagedProductionList != null && Model.PagedProductionList.Where(x => x != null).Count() > 0)
+        {
+            <div>
+            Page @(Model.PagedProductionList.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PagedProductionList.PageCount
+    
+            @Html.PagedListPager(Model.PagedProductionList, page => Url.Action("Edit",
+            new { page, EmployeeID = Model.EmployeeID, ProcessID = Model.ProcessID, ProductID = Model.ProductID, BatchID = Model.BatchID, IssueID = Model.IssueID, Date = Model.Date}), new PagedListRenderOptions()
+            {
+                FunctionToTransformEachPageLink = (liTag,aTag) => { aTag.Attributes.Add("class='page-link'", aTag.InnerHtml); liTag.InnerHtml = aTag.ToString(); return liTag; },
+                ContainerDivClasses = new List<string> { "Page", "navigation" },
+                LiElementClasses = new List<string> { "page-item"}
+            })
+            </div>
+        }
+
+

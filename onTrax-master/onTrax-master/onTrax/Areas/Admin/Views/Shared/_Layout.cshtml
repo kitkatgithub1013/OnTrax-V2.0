@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Woom onTrax</title>
+    <link rel="icon" href="//cdn.shopify.com/s/files/1/2459/8257/t/35/assets/favicon.png?8597662102368481491">
+
+
+    <!-- Load Bootstrap from MSFT CDN -->
+
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <!--jQuery Style Asset-->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+    <!-- Load JQuery from MSFT CDN-->
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+
+
+    <!-- Load Bootstrap JS from MSFT CDN -->
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.0.0/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/respond/1.4.2/respond.min.js"></script>
+
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    @RenderSection("JavaScript", required: false)
+
+    <script>
+        $(function () {
+
+            $(".selector").checkboxradio({
+                icon: false // Hides radiobutton cirlce/square (icon)
+            });
+
+        });
+
+
+
+    </script>
+
+    <!-- Custom CSS -->
+
+
+    @Styles.Render("~/bundles/css")
+
+    @Scripts.Render("~/bundles/modernizr")
+
+
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/Admin"><img src="~/images/onTrax-Logo.png" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a href="https://app.powerbi.com" class="nav-link" target="_blank">Dashboards</a></li>
+                <li class="nav-item">@Html.ActionLink("Edit onTrax", "Index", "Manage", new { area = "Admin" }, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("Edit Standards", "Index", "Standards", new { area = "Admin" }, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("Data Management", "Index", "Data", new { area = "Admin" }, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("Help", "Help", "Home", new { area = "Admin" }, new { @class = "nav-link" })</li>
+            </ul>
+        </div>
+    </nav>
+
+    <main role="main" class="container" id="AdminContent">
+        <!-- Message Display -->
+        @* Start Generic Message *@
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                @Html.Raw(TempData["Message"])
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        @* Start Generic Message *@
+
+
+        @* Start Successful Message *@
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @Html.Raw(TempData["Success"])
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        @* End Successful Message *@
+
+
+        @* Start Error Message *@
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @Html.Raw(TempData["Error"])
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        @* End Error Message *@
+
+        <!-- End Message Display -->
+
+        @RenderBody()
+
+    </main>
+
+</body>
+
+
+
+
+</html>

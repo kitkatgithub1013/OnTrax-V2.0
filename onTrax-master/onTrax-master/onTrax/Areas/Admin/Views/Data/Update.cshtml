@@ -1,0 +1,100 @@
+﻿@model onTrax.ViewModels.UpdateDataViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4 style="color:red">Update Production</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Production.ProductionID)
+    @Html.HiddenFor(model => model.Production.StartTime)
+    @Html.HiddenFor(model => model.Production.EndTime)
+    @Html.HiddenFor(model => model.Production.DateRecorded)
+    @Html.HiddenFor(model => model.Production.Product.ProductName)
+    @Html.HiddenFor(model => model.Production.Process.ProcessName)
+    @Html.HiddenFor(model => model.Production.Batch.BatchName)
+    @Html.HiddenFor(model => model.Production.Employee.EmployeeName)
+
+
+    <div class="container">
+        <div class="row form-group">
+            <div class="col">
+                @Html.LabelFor(model => model.Production.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div>
+                    @Html.EditorFor(model => model.Production.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Production.Duration, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col">
+                @Html.LabelFor(model => model.Production.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div>
+                    @Html.EditorFor(model => model.Production.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Production.Quantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col">
+                @Html.LabelFor(model => model.Production.Employee, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Production.Employee.EmployeeID, new SelectList(Model.EmployeeList, "EmployeeID", "EmployeeName", Model.Production.Employee.EmployeeID))
+                </div>
+            </div>
+            <div class="col">
+
+                @Html.LabelFor(model => model.Production.Product, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Production.Product.ProductID, new SelectList(Model.ProductList, "ProductID", "ProductName", Model.Production.Product.ProductID))
+                </div>
+            </div>
+
+            <div class="col">
+                @Html.LabelFor(model => model.Production.Process, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Production.Process.ProcessID, new SelectList(Model.ProcessList, "ProcessID", "ProcessName", Model.Production.Process.ProcessID))
+                </div>
+            </div>
+
+            <div class="col">
+                @Html.LabelFor(model => model.Production.Batch, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Production.Batch.BatchID, new SelectList(Model.BatchList, "BatchID", "BatchName", Model.Production.Batch.BatchID))
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col">
+                @Html.LabelFor(model => model.Production.Issues, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @foreach (var issue in Model.IssueList)
+                    {
+                        <label class="font-weight-bold" for="issue_@issue.IssueID">@issue.IssueName</label>
+                        if (Model.Production.Issues.Where(x => x.IssueID == issue.IssueID).FirstOrDefault() != null)
+                        {
+
+                            <input type="checkbox" name="SelectedIssues" id="issue_@issue.IssueID" value="@issue.IssueID" class="selector" checked>
+                        }
+                        else
+                        {
+
+                            <input type="checkbox" name="SelectedIssues" id="issue_@issue.IssueID" value="@issue.IssueID" class="selector">
+                        }
+                    }
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-success" />
+            @Html.ActionLink("Cancel", "Edit", "Data", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</div>
+}
