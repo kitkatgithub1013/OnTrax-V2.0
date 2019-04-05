@@ -1,0 +1,36 @@
+﻿@model IEnumerable<onTrax.Models.Batch>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h4 style="color:red">Archived Batches</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BatchName)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null && Model.Count() > 0)
+    {
+       foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BatchName)
+                </td>
+                <td>
+                    @Html.ActionLink("Activate", "Activate", new { BatchID = item.BatchID }, new { @class = "badge badge-success badge-pill m-1" })
+                </td>
+            </tr>
+        }
+    }
+    </table>
+
+<div>
+    @Html.ActionLink("Back", "Index", "Manage", null, new { @class = "btn btn-primary" })
+</div>
+

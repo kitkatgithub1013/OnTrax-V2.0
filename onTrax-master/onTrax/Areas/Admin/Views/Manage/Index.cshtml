@@ -1,0 +1,285 @@
+﻿@model onTrax.ViewModels.ManageViewModel
+@using onTrax.Models;
+@{
+
+
+    ViewBag.Title = "Edit onTrax";
+}
+
+<h2 style="color:red" class="text-center">Edit onTrax</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <!-- Start Edit Employees -->
+            <div id="employee_accordion">
+                <div class="card">
+                    <div class="card-header" id="employeeHeading">
+                        <h5 class="mb-0">
+
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#employeeContent" aria-expanded="true" aria-controls="employeeContent">
+                                Employees
+                            </button>
+
+
+                            <a href="/admin/employees/create">
+                                <button class="btn btn-success float-right" data-toggle="collapse" aria-expanded="true">
+                                    <span class="glyphicon glyphicon-plus text-light"></span> Add
+                                </button>
+                            </a>
+                        </h5>
+                    </div>
+
+                    <div id="employeeContent" class="panel-collapse collapse" aria-labelledby="employeeHeading" data-parent="#accordion">
+                        <div class="card-body">
+
+                                @if(Model.Employees != null && Model.Employees.Where(x => x != null).Count() > 0)
+                                {
+                                    <ul class="list-group">
+                                    @foreach (Employee e in Model.Employees)
+                                    {
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            @e.EmployeeName
+                                            <div class="float-right">
+                                                @Html.ActionLink("Archive", "Archive", "Employees", new { EmployeeID = @e.EmployeeID }, new { @class = "badge badge-danger badge-pill m-1" })
+                                                @Html.ActionLink("Edit", "Edit", "Employees", new { id = @e.EmployeeID }, new { @class = "badge badge-primary badge-pill m-1 float-right" })
+                                            </div>
+                                        </li>
+                                    }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <span>No active Employees found.</span>
+                                }
+
+                            @Html.ActionLink("View Archived Employees", "Index", "Employees", null, new { @class = "float-right" })
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End Edit Employees -->
+            </div>
+            <div id="product_accordion">
+                <!-- Start Edit Products -->
+                <div class="card">
+
+                    <!-- Start Heading -->
+                    <div class="card-header" id="productHeading">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#productContent" aria-expanded="true" aria-controls="productContent">
+                                Products
+                            </button>
+                            <a href="/admin/products/create">
+                                <button class="btn btn-success float-right" data-toggle="collapse" aria-expanded="true">
+                                    <span class="glyphicon glyphicon-plus text-light"></span> Add
+                                </button>
+                            </a>
+                        </h5>
+                    </div>
+                    <!-- End Heading -->
+                    <!-- Start Content -->
+                    <div id="productContent" class="collapse" aria-labelledby="productHeading" data-parent="#accordion">
+
+                        <div class="card-body">
+
+                                @if (Model.Products != null && Model.Products.Where(x => x != null).Count() > 0)
+                                {
+                                    <ul class="list-group">
+                                    @foreach (Product p in Model.Products)
+                                    {
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        @p.ProductName
+                                        <div class="float-right">
+                                            @Html.ActionLink("Archive", "Archive", "Products", new { ProductID = @p.ProductID }, new { @class = "badge badge-danger badge-pill m-1" })
+                                            @Html.ActionLink("Edit", "Edit", "Products", new { id = @p.ProductID }, new { @class = "badge badge-primary badge-pill m-1 float-right" })
+                                        </div>
+                                    </li>
+                                    }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <span>No active Products found.</span>
+                                }
+
+                            @Html.ActionLink("View Archived Products", "Index", "Products", null, new { @class = "float-right" })
+                        </div>
+
+
+                    </div>
+                    <!-- End Content -->
+
+                </div>
+                <!-- End Edit Products -->
+            </div>
+            <div id="process_accordion">
+                <!-- Start Edit Processes -->
+                <div class="card">
+
+                    <!-- Start Heading -->
+                    <div class="card-header" id="processHeading">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#processContent" aria-expanded="true" aria-controls="processContent">
+                                Processes
+                            </button>
+
+                            <a href="/admin/processes/create">
+                                <button class="btn btn-success float-right" data-toggle="collapse" aria-expanded="true">
+                                    <span class="glyphicon glyphicon-plus text-light"></span> Add
+                                </button>
+                            </a>
+                        </h5>
+                    </div>
+                    <!-- End Heading -->
+                    <!-- Start Content -->
+                    <div id="processContent" class="collapse" aria-labelledby="processHeading" data-parent="#accordion">
+                        <div class="card-body">
+
+                                @if (Model.Processes != null && Model.Processes.Where(x => x != null).Count() > 0)
+                                {
+                                <ul class="list-group">
+                                @foreach (Process p in Model.Processes)
+                                    {
+                                        <li class="list-group-item ">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    @p.ProcessName
+                                                </div>
+                                                <div class="float-right">
+                                                    @Html.ActionLink("Archive", "Archive", "Processes", new { ProcessID = @p.ProcessID }, new { @class = "badge badge-danger badge-pill m-1" })
+                                                    @Html.ActionLink("Edit", "Edit", "Processes", new { id = @p.ProcessID }, new { @class = "badge badge-primary badge-pill m-1 float-right" })
+                                                </div>
+                                                </div>
+                                        </li>
+                                    }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <span>No active Processes found.</span>
+                                }
+
+                            @Html.ActionLink("View Archived Processes", "Index", "Processes", null, new { @class = "float-right" })
+
+                        </div>
+                    </div>
+                    <!-- End Content -->
+
+                </div>
+                <!-- End Edit Processes -->
+            </div>
+            <div id="issue_accordion">
+                <!-- Start Edit Issues -->
+                <div class="card">
+
+                    <!-- Start Heading -->
+                    <div class="card-header" id="issueHeading">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#issueContent" aria-expanded="true" aria-controls="issueContent">
+                                Issues
+                            </button>
+
+                            <a href="/admin/issues/create">
+                                <button class="btn btn-success float-right" data-toggle="collapse" aria-expanded="true">
+                                    <span class="glyphicon glyphicon-plus text-light"></span> Add
+                                </button>
+                            </a>
+                        </h5>
+                    </div>
+                    <!-- End Heading -->
+                    <!-- Start Content -->
+                    <div id="issueContent" class="collapse" aria-labelledby="issueHeading" data-parent="#accordion">
+                        <div class="card-body">
+
+                                @if (Model.Issues != null && Model.Issues.Where(x => x != null).Count() > 0)
+                                {
+                                    <ul class="list-group">
+                                    @foreach (Issue i in Model.Issues)
+                                    {
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        @i.IssueName
+
+                                        @* Quarantine (ID =5) cannot be archived *@
+                                        <div class="float-right">
+                                            @if (i.IssueID != 5)
+                                                {
+                                            @Html.ActionLink("Archive", "Archive", "Issues", new { IssueID = @i.IssueID }, new { @class = "badge badge-danger badge-pill m-1" })
+                                            @Html.ActionLink("Edit", "Edit", "Issues", new { id = @i.IssueID }, new { @class = "badge badge-primary badge-pill m-1 float-right" })
+                                                }
+                                        </div>
+                                    </li>
+                                    }
+                                </ul>
+                                }
+                                else
+                                {
+
+                                    <span>No active Issues found.</span>
+                                }
+
+                            @Html.ActionLink("View Archived Issues", "Index", "Issues", null, new { @class = "float-right" })
+                        </div>
+                    </div>
+                    <!-- End Content -->
+
+                </div>
+                <!-- End Edit Issues -->
+            </div>
+            <div id="issue_accordion">
+                <!-- Start Edit Batches -->
+                <div class="card">
+
+                    <!-- Start Heading -->
+                    <div class="card-header" id="batchHeading">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#batchContent" aria-expanded="true" aria-controls="batchContent">
+                                Batches
+                            </button>
+
+                            <a href="/admin/batches/create">
+                                <button class="btn btn-success float-right" data-toggle="collapse" aria-expanded="true">
+                                    <span class="glyphicon glyphicon-plus text-light"></span> Add
+                                </button>
+                            </a>
+                        </h5>
+                    </div>
+                    <!-- End Heading -->
+                    <!-- Start Content -->
+                    <div id="batchContent" class="collapse" aria-labelledby="batchHeading" data-parent="#accordion">
+                        <div class="card-body">
+
+                                @if (Model.Batches != null && Model.Batches.Where(x => x != null).Count() > 0)
+                                {
+                                    <ul class="list-group">
+                                    @foreach (Batch b in Model.Batches)
+                                    {
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        @b.BatchName
+                                        <div class="float-right">
+                                            @Html.ActionLink("Archive", "Archive", "Batches", new { BatchID = @b.BatchID }, new { @class = "badge badge-danger badge-pill m-1" })
+                                            @Html.ActionLink("Edit", "Edit", "Batches", new { id = @b.BatchID }, new { @class = "badge badge-primary badge-pill m-1 float-right" })
+                                        </div>
+                                    </li>
+                                    }
+                                    </ul>
+                                }
+                                else
+                                {
+
+                                    <span>No active Batches found.</span>
+                                }
+
+                            @Html.ActionLink("View Archived Batches", "Index", "Batches", null, new { @class = "float-right" })
+                        </div>
+                    </div>
+                    <!-- End Content -->
+
+                </div>
+                <!-- End Edit Batches -->
+
+
+            </div>
+        </div>
+    </div>
+</div>

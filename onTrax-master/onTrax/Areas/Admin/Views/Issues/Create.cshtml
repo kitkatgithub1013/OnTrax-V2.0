@@ -1,0 +1,32 @@
+﻿@model onTrax.Models.Issue
+
+@{
+    ViewBag.Title = "Add Issue";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4 style="color:red;">@ViewBag.Title</h4>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(model => model.IssueName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.IssueName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.IssueName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div>
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add" class="btn btn-success" />
+            @Html.ActionLink("Cancel", "Index", "Manage", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</div>
+}
+

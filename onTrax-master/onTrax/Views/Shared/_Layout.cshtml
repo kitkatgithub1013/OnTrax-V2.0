@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Woom onTrax</title>
+    <!--Mobile Device Links-->
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" sizes="144x144" href="//cdn.shopify.com/s/files/1/2459/8257/t/35/assets/apple-touch-icon-144x144.png?8597662102368481491">
+    <link rel="apple-touch-icon" sizes="152x152" href="//cdn.shopify.com/s/files/1/2459/8257/t/35/assets/apple-touch-icon-152x152.png?8597662102368481491">
+
+    <!--Woom Favicon-->
+    <link rel="icon" href="//cdn.shopify.com/s/files/1/2459/8257/t/35/assets/favicon.png?8597662102368481491">
+
+
+    <!--Start CSS Links-->
+    <!--Bootstrap Style Assets-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/glyph.css" rel="stylesheet">
+    <link href="/css/bootstrap-reboot.css" rel="stylesheet">
+    <link href="/css/bootstrap-grid.css" rel="stylesheet">
+    <!-- Load Bootstrap from MSFT CDN -->
+
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <!--jQuery Style Asset-->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="~/css/ext-jquery-ui.css">
+
+    <!--Custom Woom CSS-->
+    <link href="/css/woom.css" rel="stylesheet">
+    <!--End CSS Links-->
+    <!--Start JS Links-->
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+
+    <!-- Load Bootstrap JS from MSFT CDN -->
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.0.0/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/respond/1.4.2/respond.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/js/ext-jquery-ui.js"></script>
+    <script src="~/js/woom.js"></script>
+    <!--End JS Links-->
+    @** View specific JS **@
+    @RenderSection("JavaScript", required: false)
+
+    <script>
+        $(function () {
+
+            $(".selector").checkboxradio({
+                icon: false // Hides radiobutton cirlce/square (icon)
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+    <!-- Message Display -->
+    @* Start Generic Message *@
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            @Html.Raw(TempData["Message"])
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    @* Start Generic Message *@
+
+
+    @* Start Successful Message *@
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @Html.Raw(TempData["Success"])
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    @* End Successful Message *@
+
+
+    @* Start Error Message *@
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @Html.Raw(TempData["Error"])
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    @* End Error Message *@
+
+    <!-- End Message Display -->
+    
+    <!-- Begin Content -->
+
+    @RenderBody()
+
+    <!-- End Content -->
+
+    <script src="~/js/woom.js"></script>
+    <script>
+        countChecked();
+        $("#issues input[type=checkbox]").on("click", countChecked);
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<onTrax.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h4 style="color:red">Archived Employees</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PIN)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null && Model.Count() > 0)
+    {
+
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PIN)
+                </td>
+                <td>
+                    @Html.ActionLink("Activate", "Activate", new { EmployeeID = item.EmployeeID }, new { @class = "badge badge-success badge-pill m-1" })
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Back", "Index", "Manage", null, new { @class = "btn btn-primary" })
+</div>
+

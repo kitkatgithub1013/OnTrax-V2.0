@@ -1,0 +1,49 @@
+﻿@model onTrax.ViewModels.EditProcessViewModel
+
+@{
+    ViewBag.Title = "Add Process";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4 style="color:red;">@ViewBag.Title</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Process.ProcessName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Process.ProcessName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Process.ProcessName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col">
+            @Html.LabelFor(model => model.Process.Issues, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.Issues != null && Model.Issues.Where(x => x != null).Count() > 0)
+                {
+                    foreach (var issue in Model.Issues)
+                    {
+                        <label class="font-weight-bold" for="issue_@issue.IssueID">@issue.IssueName</label>
+                        <input type="checkbox" name="SelectedIssues" id="issue_@issue.IssueID" value="@issue.IssueID" class="selector">
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add" class="btn btn-success" />
+            @Html.ActionLink("Cancel", "Index", "Manage", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</div>
+}
